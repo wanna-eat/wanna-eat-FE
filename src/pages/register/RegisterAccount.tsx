@@ -212,6 +212,7 @@ const RegisterAccount = () => {
           <Button
             onClick={() => {
               // TODO: 회원가입 API 연동
+              navigate('/initial-settings');
             }}
             disabled={!isEmailVerified || !isPasswordValid || !passwordConfirm || password !== passwordConfirm}
           >

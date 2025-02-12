@@ -14,6 +14,8 @@ import ServiceTerms from './pages/terms/ServiceTerms';
 import PrivacyPolicy from './pages/terms/PrivacyPolicy';
 import ThirdPartyPolicy from './pages/terms/ThirdPartyPolicy';
 import RegisterAccount from './pages/register/RegisterAccount';
+import InitialSettings from './pages/InitialSettings';
+import SettingFinished from './pages/SettingFinished';
 
 
 function App() {
@@ -87,6 +89,8 @@ function App() {
         <Route path="/terms/service" element={<ServiceTerms />} />
         <Route path="/terms/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms/third-party" element={<ThirdPartyPolicy />} />
+        <Route path="/initial-settings" element={<InitialSettings />} />
+        <Route path="/setting-finished" element={<SettingFinished />} />
         <Route path='/home' element={<Home />} />
         <Route path='/home/restaurant' element={<RestaurantList />} />
         <Route path='/home/cafe' element={<CafeList />} />
