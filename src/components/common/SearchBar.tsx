@@ -31,10 +31,10 @@ const SearchBar = ({ value, onChange, placeholder = '검색어를 입력해주�
         css={css`
           border: none;
           background: none;
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 400;
           outline: none;
-
+          flex-grow: 1;
           &::placeholder {
             color: #878787;
           }

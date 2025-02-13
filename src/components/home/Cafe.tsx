@@ -12,11 +12,14 @@ import {
   muckpotData,
 } from '../../constants/dummyData';
 import MuckpotJoinModal from '../restaurantList/MuckpotJoinModal';
+import MuckpotCreateModal from '../restaurantList/MuckpotCreateModal';
+import { useNavigate } from 'react-router-dom';
 
 const Cafe = () => {
   const [groupCafes, setGroupCafes] = useState(groupCafeData);
   const [homeCards, setHomeCards] = useState(HomeCardList);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalState, setModalState] = useState<'join' | 'create' | null>(null);
+  const navigation = useNavigate();
 
   const toggleGroupFavorite = (index: number) => {
     setGroupCafes((prev) =>
@@ -83,15 +86,24 @@ const Cafe = () => {
             imageUrl={homeCard.imageUrls || []}
             isFavorite={homeCard.isFavorite}
             onToggleFavorite={() => toggleHomeCardFavorite(index)}
-            onClick={() => setIsModalOpen(true)}
+            onOpenModal={(type) => setModalState(type)}
           />
         ))}
       </Col>
-      <MuckpotJoinModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        muckpotData={muckpotData}
-      />
+      {modalState === 'join' && (
+        <MuckpotJoinModal
+          isOpen={true}
+          onClose={() => setModalState(null)}
+          muckpotData={muckpotData}
+        />
+      )}
+      {modalState === 'create' && (
+        <MuckpotCreateModal
+          isOpen={true}
+          onClose={() => setModalState(null)}
+          onCreate={() => navigation('/group/make')}
+        />
+      )}
     </Col>
   );
 };

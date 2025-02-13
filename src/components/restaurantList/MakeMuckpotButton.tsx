@@ -1,7 +1,9 @@
 import { css } from '@emotion/react';
 import AppLogoWhite from '../../assets/home/appLogoWhite.svg';
+import { useNavigate } from 'react-router-dom';
 
 const MakeMuckpotButton = () => {
+  const navigation = useNavigate();
   return (
     <button
       css={css`
@@ -22,6 +24,7 @@ const MakeMuckpotButton = () => {
         width: 90%;
         margin: 20px auto 0 auto;
       `}
+      onClick={() => navigation('/group/input')}
     >
       <img
         src={AppLogoWhite}

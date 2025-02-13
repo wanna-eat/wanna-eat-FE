@@ -1,28 +1,14 @@
 import { css } from '@emotion/react';
 import { Col } from '../commons/Flex';
-import MuckpotInfoBox from './MuckpotInfoBox';
-
-interface Muckpot {
-  id: number;
-  title: string;
-  date: string;
-  time: string;
-  members: string[];
-  restaurant: string;
-  tags: string[];
-  category: string;
-  address: string;
-  message: string;
-}
-
-interface MuckpotJoinModalProps {
+import QuestionBeeImage from '../../assets/bee/question.svg';
+interface MuckpotCreateModalProps {
   isOpen: boolean;
   onClose: () => void;
-  muckpotData?: Muckpot;
+  onCreate: () => void;
 }
 
-const MuckpotJoinModal = ({ isOpen, onClose, muckpotData }: MuckpotJoinModalProps) => {
-  if (!isOpen || !muckpotData) return null;
+const MuckpotCreateModal = ({ isOpen, onClose, onCreate }: MuckpotCreateModalProps) => {
+  if (!isOpen) return null;
 
   return (
     <Col
@@ -35,6 +21,7 @@ const MuckpotJoinModal = ({ isOpen, onClose, muckpotData }: MuckpotJoinModalProp
         align-items: center;
         justify-content: center;
         z-index: 1000;
+        width: 100%;
       `}
     >
       <div
@@ -47,17 +34,25 @@ const MuckpotJoinModal = ({ isOpen, onClose, muckpotData }: MuckpotJoinModalProp
           text-align: center;
         `}
       >
+        <img
+          src={QuestionBeeImage}
+          alt='먹팟 생성'
+          css={css`
+            width: 128px;
+            height: 128px;
+            margin-bottom: 12px;
+          `}
+        />
         <h3
           css={css`
-            margin-top: 0;
-            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #3d3d3d;
           `}
         >
-          현재 다음과 같은 먹팟이 존재해요. <br />
-          해당 먹팟에 참여하시겠어요?
+          이 장소로 먹팟을 생성하시겠어요?
         </h3>
-
-        <MuckpotInfoBox muckpotData={muckpotData} />
 
         <div
           css={css`
@@ -73,21 +68,21 @@ const MuckpotJoinModal = ({ isOpen, onClose, muckpotData }: MuckpotJoinModalProp
               padding: 12px;
               border-radius: 20px;
             `}
-            onClick={onClose}
+            onClick={onCreate}
           >
-            예
+            먹팟 생성하기
           </button>
           <button
             css={css`
-              background: white;
+              background: rgba(255, 102, 102, 0.2);
               color: #ff6666;
               padding: 12px;
               border-radius: 20px;
-              border: 1px solid #ff6666;
+              border: 1px solid #f66;
             `}
             onClick={onClose}
           >
-            아니요
+            취소
           </button>
         </div>
       </div>
@@ -95,4 +90,4 @@ const MuckpotJoinModal = ({ isOpen, onClose, muckpotData }: MuckpotJoinModalProp
   );
 };
 
-export default MuckpotJoinModal;
+export default MuckpotCreateModal;

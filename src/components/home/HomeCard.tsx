@@ -14,7 +14,7 @@ interface HomeCardProps {
   imageUrl?: string[];
   isFavorite?: boolean;
   onToggleFavorite: () => void;
-  onClick?: () => void;
+  onOpenModal: (type: 'join' | 'create') => void;
 }
 
 const HomeCard = ({
@@ -25,7 +25,7 @@ const HomeCard = ({
   imageUrl = [],
   isFavorite = false,
   onToggleFavorite,
-  onClick,
+  onOpenModal,
 }: HomeCardProps) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
@@ -128,6 +128,7 @@ const HomeCard = ({
             border: solid 1px #e1e1e1;
             background-color: #fff;
           `}
+          onClick={() => onOpenModal('create')}
         >
           먹팟 만들기
         </button>
@@ -139,7 +140,7 @@ const HomeCard = ({
             border: solid 1px #e1e1e1;
             background-color: #fff;
           `}
-          onClick={onClick}
+          onClick={() => onOpenModal('join')}
         >
           현재 먹팟 참여
         </button>

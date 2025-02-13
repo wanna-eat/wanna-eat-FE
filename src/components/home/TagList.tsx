@@ -2,9 +2,10 @@ import { css } from '@emotion/react';
 
 interface TagListProps {
   tags: string[];
+  changeColor?: boolean;
 }
 
-const TagList = ({ tags }: TagListProps) => {
+const TagList = ({ tags, changeColor = false }: TagListProps) => {
   return (
     <div
       css={css`
@@ -17,7 +18,7 @@ const TagList = ({ tags }: TagListProps) => {
         <span
           key={index}
           css={css`
-            background: rgba(255, 102, 102, 0.1);
+            background: ${changeColor ? 'white' : 'rgba(255, 102, 102, 0.1)'};
             color: #f66;
             padding: 4px 8px;
             border-radius: 8px;

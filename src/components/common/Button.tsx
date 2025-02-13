@@ -24,20 +24,23 @@ const Button = ({ width = '100%', children, disabled, ...props }: ButtonProps) =
         background: ${disabled ? '#E1E1E1' : '#F66'};
         white-space: nowrap;
         cursor: ${disabled ? 'not-allowed' : 'pointer'};
+        transition: 0.3s;
       `}
       disabled={disabled}
       {...props}
     >
-      <div css={css`
-        color: #FFF;
-        text-align: center;
-        font-family: Pretendard;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-        letter-spacing: -0.1px;
-      `}>
+      <div
+        css={css`
+          color: #fff;
+          text-align: center;
+          font-family: Pretendard;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          letter-spacing: -0.1px;
+        `}
+      >
         {children}
       </div>
     </button>

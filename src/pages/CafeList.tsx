@@ -9,12 +9,15 @@ import MakeMuckpotButton from '../components/restaurantList/MakeMuckpotButton';
 import { muckpotData, TAGS } from '../constants/dummyData';
 import { HomeCardList } from '../constants/dummyData';
 import MuckpotJoinModal from '../components/restaurantList/MuckpotJoinModal';
+import MuckpotCreateModal from '../components/restaurantList/MuckpotCreateModal';
+import { useNavigate } from 'react-router-dom';
 
 const CafeList = () => {
   const [search, setSearch] = useState('');
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [homeCards, setHomeCards] = useState(HomeCardList);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalState, setModalState] = useState<'join' | 'create' | null>(null);
+  const navigation = useNavigate();
 
   const toggleHomeCardFavorite = (index: number) => {
     setHomeCards((prev) =>
@@ -26,7 +29,7 @@ const CafeList = () => {
   return (
     <>
       <Col>
-        <BackHeader title={'카페'}></BackHeader>
+        <BackHeader firstTitle={'카페'}></BackHeader>
         <div
           css={css`
             margin-top: 12px;
@@ -55,15 +58,24 @@ const CafeList = () => {
               imageUrl={homeCard.imageUrls || []}
               isFavorite={homeCard.isFavorite}
               onToggleFavorite={() => toggleHomeCardFavorite(index)}
-              onClick={() => setIsModalOpen(true)}
+              onOpenModal={(type) => setModalState(type)}
             />
           ))}
         </Col>
-        <MuckpotJoinModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          muckpotData={muckpotData}
-        />
+        {modalState === 'join' && (
+          <MuckpotJoinModal
+            isOpen={true}
+            onClose={() => setModalState(null)}
+            muckpotData={muckpotData}
+          />
+        )}
+        {modalState === 'create' && (
+          <MuckpotCreateModal
+            isOpen={true}
+            onClose={() => setModalState(null)}
+            onCreate={() => navigation('/group/make')}
+          />
+        )}
       </Col>
     </>
   );
